@@ -28,7 +28,7 @@ fn bench_this(compact: &StandardCellBoard4Snakes11x11, instruments: &Instruments
 
 fn bench_compact_full(compact: &StandardCellBoard4Snakes11x11, instruments: &Instruments) {
     compact
-        .simulate(instruments, compact.get_snake_ids())
+        .simulate(instruments, &compact.get_snake_ids())
         .for_each(|_| {});
 }
 

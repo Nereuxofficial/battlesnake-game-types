@@ -468,7 +468,7 @@ mod test {
             let (mvs, g) = results.pop().unwrap();
             dbg!(mvs);
             g.assert_consistency();
-            g.simulate(&instruments, compact_ids.clone()).for_each(drop);
+            g.simulate(&instruments, &compact_ids).for_each(drop);
         }
 
         {
@@ -494,7 +494,7 @@ mod test {
             dbg!(mvs);
             eprintln!("{}", g);
             g.assert_consistency();
-            g.simulate(&instruments, compact_ids.clone()).for_each(drop);
+            g.simulate(&instruments, &compact_ids.clone()).for_each(drop);
         }
         {
             let snakes_and_moves = vec![
@@ -521,7 +521,7 @@ mod test {
             assert_eq!(g.get_health(&SnakeId(0)), 0);
             assert_eq!(g.get_health(&SnakeId(1)), 0);
             g.assert_consistency();
-            g.simulate(&instruments, compact_ids).for_each(drop);
+            g.simulate(&instruments, &compact_ids).for_each(drop);
         }
     }
 

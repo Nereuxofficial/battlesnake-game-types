@@ -263,15 +263,15 @@ pub trait SimulableGame<T: SimulatorInstruments, const N_SNAKES: usize>:
     fn simulate(
         &self,
         instruments: &T,
-        snake_ids: Vec<Self::SnakeIDType>,
+        snake_ids: &[Self::SnakeIDType],
     ) -> Box<dyn Iterator<Item = (Action<N_SNAKES>, Self)> + '_> {
         let moves_to_simulate = Move::all();
         let build = snake_ids
             .into_iter()
-            .map(|s| (s, moves_to_simulate.as_slice()));
+            .map(|s| (s.clone(), moves_to_simulate.as_slice()));
         self.simulate_with_moves(instruments, build)
     }
-    /// simulates the next possible states for a a game with a given set of snakes and moves, producing a list of the new games,
+    /// simulates the next possible states for a game with a given set of snakes and moves, producing a list of the new games,
     /// along with the moves that got to that position
     #[allow(clippy::type_complexity)]
     fn simulate_with_moves<S>(
